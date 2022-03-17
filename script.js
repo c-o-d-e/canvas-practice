@@ -4,6 +4,13 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 // ctx.fillRect(0, 0, canvas.width, canvas.height); //Fills color to a rectangle
 
+//REsizing Canvas
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
 // Mouse position object
 const mouse = {
   x: null,
@@ -21,12 +28,12 @@ canvas.addEventListener("mousemove", function (event) {
 // Adding Font using CTX
 ctx.fillStyle = "black";
 ctx.font = "bold 15px Arial";
-ctx.fillText("Welcome", 50, 35);
+ctx.fillText("Welcome", 45, 35);
 
 // Get image data for pixel manipulation
 
-ctx.strokeRect(10, 0, 500, 120); //To check the outline of image being selected
-const textCoordinates = ctx.getImageData(10, 0, 500, 120);
+// ctx.strokeRect(30, 10, 100, 30); //To check the outline of image being selected
+const textCoordinates = ctx.getImageData(30, 10, 100, 30);
 
 //Creates class of particles
 class Particles {
@@ -86,7 +93,7 @@ function init() {
       ) {
         let positionX = x;
         let positionY = y;
-        particleArray.push(new Particles(positionX * 10, positionY * 10));
+        particleArray.push(new Particles(positionX * 15, positionY * 15));
       }
     }
   }
@@ -96,6 +103,7 @@ init();
 // console.log(particleArray);
 
 function animate() {
+  window.addEventListener("resize", resizeCanvas);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (let i = 0; i < particleArray.length; i++) {
     particleArray[i].draw();
